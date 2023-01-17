@@ -1,15 +1,16 @@
-from django.forms import ModelForm,TextInput,Textarea
+from django.forms import ModelForm, TextInput, Textarea
 from .models import User
+
 
 class ArticlesForm(ModelForm):
     class Meta:
-        model = User                            # поля пользователя
-        fields = ['name','surname','patronymic','self_phone_number','home_phone_number','passport_number']
+        model = User  # поля пользователя
+        fields = ['name', 'surname', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
 
-        widgets={                               # как выглядят поля на HTML странице
-            "name":TextInput(attrs={
-                'class':'form-control',
-                'placeholder':'Ваше имя'
+        widgets = {  # как выглядят поля на HTML странице
+            "name": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ваше имя'
             }),
             "surname": TextInput(attrs={
                 'class': 'form-control',
