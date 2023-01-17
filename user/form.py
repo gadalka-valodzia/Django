@@ -4,7 +4,7 @@ from .models import User
 class ArticlesForm(ModelForm):
     class Meta:
         model = User                            # поля пользователя
-        fields = ['name','surname','patronymic','self_phone_number','home_phone_number']
+        fields = ['name','surname','patronymic','self_phone_number','home_phone_number','passport_number']
 
         widgets={                               # как выглядят поля на HTML странице
             "name":TextInput(attrs={
@@ -26,5 +26,9 @@ class ArticlesForm(ModelForm):
             "home_phone_number": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ваш городской номер телефона'
+            }),
+            "passport_number": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ваш номер паспорта'
             })
         }
