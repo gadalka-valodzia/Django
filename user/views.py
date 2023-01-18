@@ -8,7 +8,8 @@ from django.http import HttpResponse
 # производим проверку и работа с данными
 def User_index(request): #request ДОЛЖЕН БЫТЬ POST!
     error = ''
-    if request.method == 'POST':  # проверка на добавление
+    if request.method == "POST":  # проверка на добавление
+        print(request.POST)
         form = ArticlesForm(request.POST)  # получение данных с формы
         if form.is_valid():  # провека навалидность
            print(form.cleaned_data)
@@ -21,7 +22,6 @@ def User_index(request): #request ДОЛЖЕН БЫТЬ POST!
                passport_number=form.cleaned_data['passport_number']
            )
            user_create.save() #сохраняем данные в бд
-
         else:
             error = 'Форма была заполнена неверно'
 
