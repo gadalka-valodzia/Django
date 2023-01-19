@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from user import views
+
+admin.site.site_header = 'Администрация по контролю учёта кадров'
+admin.site.index_title = 'Панель администрирования'
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.User_index),
+    path('user/',views.User_index),
 
 ]

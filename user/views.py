@@ -13,7 +13,7 @@ def User_index(request): #request ДОЛЖЕН БЫТЬ POST!
         form = ArticlesForm(request.POST)  # получение данных с формы
         if form.is_valid():  # провека навалидность
            print(form.cleaned_data)
-           user_create = User(       #создание обьекта класса и занесение данных в бд
+           user_create = User(       # создание обьекта класса и занесение данных в бд
                name=form.cleaned_data['name'],
                surname=form.cleaned_data['surname'],
                self_phone_number=form.cleaned_data['self_phone_number'],
