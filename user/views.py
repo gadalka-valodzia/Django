@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .form import ArticlesForm
 from .models import User
+from promotion.form_promotion import PromotionForm
+from promotion.views import Promotion_save
 from django.http import HttpResponse
 
 
@@ -11,8 +13,11 @@ def User_index(request): #request ДОЛЖЕН БЫТЬ POST!
     if request.method == "POST":  # проверка на добавление
         print(request.POST)
         form = ArticlesForm(request.POST)  # получение данных с формы
-        if form.is_valid():  # провека навалидность
+        form_promotion = PromotionForm(request.POST)
+        if form.is_valid() and form_promotion.is_valid():  # провека навалидность
            print(form.cleaned_data)
+           print(form_promotion.cleaned_data)
+           Promotion_save(form_promotion)
            user_create = User(       # создание обьекта класса и занесение данных в бд
                name=form.cleaned_data['name'],
                surname=form.cleaned_data['surname'],
@@ -28,8 +33,10 @@ def User_index(request): #request ДОЛЖЕН БЫТЬ POST!
     else:
         form = ArticlesForm()  # шаблон формы для передачи
 
+    form_promotion = PromotionForm(request.POST)
     data = {  # словарь который отправляем как ответ
         'form': form,
+        'form_promotion': form_promotion,
         'error': error
     }
     return render(request, 'djangoProject/user.html', data)
