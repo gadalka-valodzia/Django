@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea
 from .models import User
-from .models import Promotion
+from .models import Promotion, Contract
 
 
 class UserForm(ModelForm):
@@ -48,5 +48,19 @@ class PromotionForm(ModelForm):
             "promotion": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Ваше поощерение'
+            })
+        }
+class ContractForm(ModelForm):
+    class Meta:
+        model = Contract
+        fields = ['data_okonchanie','data_zukluchenie']
+        widgets = {
+            "data_zukluchenie": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата заключения контракта'
+            }),
+            "data_okonchanie": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата окончания контракта'
             })
         }
