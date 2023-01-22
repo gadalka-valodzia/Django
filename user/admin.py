@@ -11,3 +11,10 @@ class UserAdmin(admin.ModelAdmin):
     list_per_page = 5
     search_fields = ['surname','name','patronymic','self_phone_number','home_phone_number','passport_number']
     list_filter = ['name','surname', 'patronymic']
+
+@admin.register(Promotion)
+class PromotionAdmin(admin.ModelAdmin):
+    list_display = ['promotion','personal_id']
+    ordering = ['promotion']
+    list_per_page = 7
+    search_fields = ['promotion','personal_id']

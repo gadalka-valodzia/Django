@@ -1,8 +1,9 @@
 from django.forms import ModelForm, TextInput, Textarea
 from .models import User
+from .models import Promotion
 
 
-class ArticlesForm(ModelForm):
+class UserForm(ModelForm):
     class Meta:
         model = User  # поля пользователя
         fields = ['name', 'surname', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
@@ -32,5 +33,20 @@ class ArticlesForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Ваш номер паспорта'
             })
+            # "promotion": TextInput(attrs={
+            #     'class': 'form-control',
+            #     'placeholder': 'Ваше поощерение'
+            # })
         }
 
+class PromotionForm(ModelForm):
+
+    class Meta:
+        model = Promotion
+        fields = ['promotion']
+        widgets = {
+            "promotion": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ваше поощерение'
+            })
+        }
