@@ -30,7 +30,8 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
             )
             contract_create = Contract(
                 data_zukluchenie=form_contract.cleaned_data['data_zukluchenie'],
-                data_okonchanie=form_contract.cleaned_data['data_okonchanie']
+                data_okonchanie=form_contract.cleaned_data['data_okonchanie'],
+                #personal_id=form_contract.cleaned_data['personal_id']
 
             )
             contract_create.save()  # сохраняем данные в бд

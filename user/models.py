@@ -12,13 +12,7 @@ class Promotion(models.Model):
         return f'{self.promotion}'
 
 
-class Contract(models.Model):
-    data_zukluchenie = models.DateField(null=True)
-    data_okonchanie = models.DateField(null=True)
-    personal_id = models.IntegerField(null=True)
 
-    def __str__(self):
-        return f'{self.personal_id} - {self.data_zukluchenie} - {self.data_okonchanie}'
 
 
 class User(models.Model):
@@ -30,4 +24,11 @@ class User(models.Model):
     passport_number = models.IntegerField()  # номер паспорта
 
     promotion = models.ForeignKey(Promotion, on_delete=models.PROTECT, null=True)
-    contract = models.ForeignKey(Contract, on_delete=models.SET_NULL,null=True)
+
+class Contract(models.Model):
+    data_zukluchenie = models.DateField(null=True)
+    data_okonchanie = models.DateField(null=True)
+    personal = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+
+    def __str__(self):
+        return f'{self.data_zukluchenie} - {self.data_okonchanie}'

@@ -6,8 +6,7 @@ from .models import *
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['surname', 'name', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number',
-                    'contract']
+    list_display = ['surname', 'name', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
     ordering = ['surname']
     list_per_page = 5
     search_fields = ['surname', 'name', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
