@@ -7,10 +7,9 @@ from django.utils.text import slugify
 class Promotion(models.Model):
     promotion = models.CharField(max_length=40)
     personal_id = models.IntegerField(null=True)
+
     def __str__(self):
         return f'{self.promotion}'
-
-
 class User(models.Model):
     name = models.CharField(max_length=40)  # имя сотрудника
     surname = models.CharField(max_length=40)  # фамилия сотрудника
@@ -19,6 +18,6 @@ class User(models.Model):
     home_phone_number = models.IntegerField(blank=True)  # номер городского телефона сотрудника
     passport_number = models.IntegerField()  # номер паспорта
 
-    promotion = models.ForeignKey(Promotion,on_delete=models.PROTECT,null=True)
+    promotiom = models.ForeignKey(Promotion,on_delete=models.PROTECT,null=True)
 
 
