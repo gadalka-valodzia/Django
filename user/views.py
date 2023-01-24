@@ -25,18 +25,21 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
                 patronymic=form.cleaned_data['patronymic'],
                 passport_number=form.cleaned_data['passport_number']
             )
-            promotion_create = Promotion(
-                promotion=form_promotion.cleaned_data['promotion']
-            )
+            user_create.save()
+
             contract_create = Contract(
                 data_zukluchenie=form_contract.cleaned_data['data_zukluchenie'],
                 data_okonchanie=form_contract.cleaned_data['data_okonchanie'],
-                #personal_id=form_contract.cleaned_data['personal_id']
-
-            )
+                personal_id=user_create.id
+                        )
             contract_create.save()  # сохраняем данные в бд
+
+            promotion_create = Promotion(
+                promotion=form_promotion.cleaned_data['promotion'],
+                personal_id=user_create.id
+            )
             promotion_create.save()  # сохраняем данные в бд
-            user_create.save()  # сохраняем данные в бд
+             # сохраняем данные в бд
         else:
             error = 'Форма была заполнена неверно'
 
