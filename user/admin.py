@@ -1,9 +1,10 @@
 from django.contrib import admin, messages
 from .models import *
+from django.contrib.admin.models import LogEntry
 
 
 # Register your models here.
-
+LogEntry.objects.all().delete()
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ['surname', 'name', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
@@ -15,8 +16,8 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Contract)
 class ContractAdmin(admin.ModelAdmin):
-    list_display = ['data_zukluchenie', 'data_okonchanie','personal_id']
-    ordering = ['personal_id']
+    list_display = ['personal','data_zukluchenie', 'data_okonchanie']
+    ordering = ['personal']
     list_per_page = 7
 
 @admin.register(Promotion)

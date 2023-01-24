@@ -5,6 +5,7 @@ from .models import Promotion, Contract
 
 class UserForm(ModelForm):
     class Meta:
+
         model = User  # поля пользователя
         fields = ['name', 'surname', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
 
