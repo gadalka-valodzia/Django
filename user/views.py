@@ -25,11 +25,12 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
                 patronymic=form.cleaned_data['patronymic'],
                 passport_number=form.cleaned_data['passport_number']
 
-
             )
             user_create.save()  # сохраняем данные в бд
             promotion_create = Promotion(
-                promotion=form_promotion.cleaned_data['promotion']
+                promotion=form_promotion.cleaned_data['promotion'],
+                personal=user_create
+
             )
             promotion_create.save()  # сохраняем данные в бд
             contract_create = Contract(

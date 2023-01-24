@@ -9,7 +9,7 @@ LogEntry.objects.all().delete()
 class UserAdmin(admin.ModelAdmin):
     list_display = ['surname', 'name', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
     ordering = ['surname']
-    list_per_page = 5
+    list_per_page = 7
     search_fields = ['surname', 'name', 'patronymic', 'self_phone_number', 'home_phone_number', 'passport_number']
     list_filter = ['name', 'surname', 'patronymic']
 
@@ -22,7 +22,7 @@ class ContractAdmin(admin.ModelAdmin):
 
 @admin.register(Promotion)
 class PromotionAdmin(admin.ModelAdmin):
-    list_display = ['promotion','personal_id']
+    list_display = ['promotion','personal']
     ordering = ['promotion']
     list_per_page = 7
-    search_fields = ['promotion','personal_id']
+    search_fields = ['promotion','personal']
