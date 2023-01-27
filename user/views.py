@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .form import UserForm, PromotionForm, ContractForm
-from .models import User, Promotion, Contract
+from .form import UserForm, PromotionForm, ContractForm,WorkForm,Mesto_nameForm
+from .models import User, Promotion, Contract, Work, list_mecto
 from django.http import HttpResponse
 
 
@@ -13,10 +13,12 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
         form = UserForm(request.POST)  # получение данных с формы
         form_promotion = PromotionForm(request.POST)
         form_contract = ContractForm(request.POST)
-        if form.is_valid() and form_promotion.is_valid() and form_contract.is_valid():  # провека навалидность
+        form_work = WorkForm(request.POST)
+        if form.is_valid() and form_promotion.is_valid() and form_contract.is_valid() and form_work.is_valid()  :  # провека навалидность
             print(form.cleaned_data)
             print(form_promotion.cleaned_data)
             print(form_contract.cleaned_data)
+            print(form_work.cleaned_data)
             user_create = User(  # создание обьекта класса и занесение данных в бд
                 name=form.cleaned_data['name'],
                 surname=form.cleaned_data['surname'],
@@ -39,19 +41,28 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
                 personal_id=user_create.id
             )
             promotion_create.save()  # сохраняем данные в бд
+
+            work_create = Work(
+                mesto = form_work.cleaned_data['mesto'],
+                data_start_work = form_work.cleaned_data['data_start_work'],
+                data_end_work = form_work.cleaned_data['data_end_work'],
+                dolzhnost = form_work.cleaned_data['dolzhnost'],
+                personal_id = user_create.id
+            )
+            work_create.save()
+
+
              # сохраняем данные в бд
         else:
             error = 'Форма была заполнена неверно'
 
-    else:
 
-        form = UserForm()  # шаблон формы для передачи
-        form_promotion = PromotionForm()
-        form_contract = ContractForm()
-    data = {  # словарь который отправляем как ответ
-        'form': form,
-        'form_promotion': form_promotion,
-        'form_contract': form_contract,
-        'error': error
-    }
+    form = UserForm()  # шаблон формы для передачи
+    form_promotion = PromotionForm()
+    form_contract = ContractForm()
+    form_work = WorkForm()
+    form_work_name = Mesto_nameForm()
+    mesto=list_mecto.objects.all()
+    data = dict(form=form, form_promotion=form_promotion, form_contract=form_contract, form_work=form_work,
+            form_work_name=form_work_name, mesto=mesto, error=error)
     return render(request, 'djangoProject/user.html', data)

@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea
 from .models import User
-from .models import Promotion, Contract
+from .models import Promotion, Contract,Work,list_mecto
 
 
 class UserForm(ModelForm):
@@ -62,5 +62,42 @@ class ContractForm(ModelForm):
             "data_okonchanie": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Дата окончания контракта'
+            })
+        }
+
+class WorkForm(ModelForm):
+
+
+    class Meta:
+        model = Work
+        fields = {'mesto','data_start_work','data_end_work','dolzhnost'}
+        widgets = {
+            "mesto": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'В/ч где работали'
+            }),
+            "data_start_work": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата начала работы'
+            }),
+            "data_end_work": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата окончания работы'
+            }),
+            "dolzhnost": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Занимаемая должность'
+            })
+        }
+
+class Mesto_nameForm(ModelForm):
+
+    class Meta:
+        model = list_mecto
+        fields = {'name_mecto'}
+        widgets = {
+            "name_mecto": TextInput(attrs={
+                'class': 'RadioSelect',
+                'choices': 'CHOICES'
             })
         }

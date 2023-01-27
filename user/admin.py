@@ -25,3 +25,10 @@ class PromotionAdmin(admin.ModelAdmin):
     ordering = ['promotion']
     list_per_page = 7
     search_fields = ['promotion','personal_id']
+
+@admin.register(Work)
+class WorkAdmin(admin.ModelAdmin):
+    list_display = ['mesto','data_start_work','data_end_work','dolzhnost']
+    ordering = ['dolzhnost']
+    list_per_page = 5
+    search_fields = ['personal_id']
