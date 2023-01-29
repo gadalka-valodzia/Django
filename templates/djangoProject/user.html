@@ -1,6 +1,127 @@
-<p><i>Пожалуйста, заполните форму. Обязательные поля помечены </i><em>*</em></p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru" class="h-auto">
+<head>
+    <meta charset="utf-8">
+
+    <title>Military.io</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+    <link href="{% static 'cover.css' %}" rel="stylesheet">
+</head>
+
+
+<body class="d-flex h-100 text-center text-bg-dark">
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+        <div>
+            <h3 class="float-md-start mb-0">Military.io</h3>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+                <a class="nav-link fw-bold py-1 px-2" aria-current="page" href="{% url 'home' %}">Главная</a>
+                <a class="nav-link fw-bold py-1 px-2" href="{% url 'about' %}">FAQ</a>
+                <a class="nav-link fw-bold py-1 px-2" href="{% url 'admin:index' %}">Войти</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="px-5 py-md-5">
+        <h1>Личная карточка</h1>
+        <fieldset>
+            <form method="POST"> {% csrf_token %}
+                <p class="lead">Персональные данные</p>
+                <p class="lead">{{ form.surname }}</p>
+                <p class="lead">{{ form.name }}</p>
+                <p class="lead">{{ form.patronymic }}</p>
+                <p class="lead">{{ form.self_phone_number }}</p>
+                <p class="lead">{{ form.home_phone_number }}</p>
+                <p class="lead">{{ form.passport_number }}</p>
+                <p class="lead">{{ form_contract.data_zukluchenie }}</p>
+                <p class="lead">{{ form_contract.data_okonchanie }}</p>
+                <p class="lead">{{ form_promotion.promotion }}</p>
+                <p class="lead">Образование</p>
+                <p class="lead">{{ form_vid_zavedenie.name_vuz }}</p>
+                <p class="lead">{{ form_obrazovanie.date_postuplen }}</p>
+                <p class="lead">{{ form_obrazovanie.date_okonch }}</p>
+                <p class="lead">{{ form_obrazovanie.obrazovanie_perepodgotovka }}</p>
+                <p class="lead">Состав семьи</p>
+                <p class="lead">{{ form_vid_rodstvenniki.name_rodstvennik }}</p>
+                <p class="lead">{{ form_rodstvenniki.name_rod }}</p>
+                <p class="lead">{{ form_rodstvenniki.surname_rod }}</p>
+                <p class="lead">{{ form_rodstvenniki.patronomyc }}</p>
+                <p class="lead">{{ form_rodstvenniki.date_born }}</p>
+                <p class="lead">{{ form_rodstvenniki.date_brak }}</p>
+                <p class="lead">{{ form_rodstvenniki.date_razvod }}</p>
+                <p class="lead">{{ form_vid_vziskanie.name_vziskanie }}</p>
+                <span>{{ error }}</span>
+                <button class="btn btn-success w-50 " type="submit">Отправить форму</button>
+                <p class="lead"></p>
+
+            </form>
+        </fieldset>
+        {% comment %} <p class="lead">
+            <a href="{% url 'user' %}" class="btn btn-lg btn-light fw-bold border-white bg-white">Заполнить</a>
+        </p>{% endcomment %}
+    </main>
+
+
+</div>
+
+</body>
+</html>
+{% comment %}
 <fieldset>
-    <legend>Персональная информация</legend>
     <form method="POST"> {% csrf_token %} {# форма будет чтото отправлять на сервер #}
         {{ form.name }}<br>
         {{ form.surname }}<br>
@@ -8,14 +129,22 @@
         {{ form.self_phone_number }}<br>
         {{ form.home_phone_number }}<br>
         {{ form.passport_number }}<br>
-        {#  <select>                                         шторка для удобства#}
-        {#  <option>Пункт 1</option>#}
-        {#  <option>Пункт 2</option>#}
-        {#</select>#}
         {{ form_promotion.promotion }}<br>
         {{ form_contract.data_zukluchenie }}<br>
         {{ form_contract.data_okonchanie }}<br>
+        {{ form_vid_zavedenie.name_vuz}}<br>
+        {{ form_obrazovanie.date_postuplen }}<br>
+        {{ form_obrazovanie.date_okonch}}<br>
+        {{ form_obrazovanie.obrazovanie_perepodgotovka }}<br>
+        {{ form_vid_rodstvenniki.name_rodstvennik}}<br>
+        {{ form_rodstvenniki.name_rod }}<br>
+        {{ form_rodstvenniki.surname_rod}}<br>
+        {{ form_rodstvenniki.patronomyc }}<br>
+        {{ form_rodstvenniki.date_born }}<br>
+        {{ form_rodstvenniki.date_brak }}<br>
+        {{ form_rodstvenniki.date_razvod }}<br>
+        {{ form_vid_vziskanie.name_vziskanie}}<br>
         <span>{{ error }}</span>
         <button class="btn btn-success " type="submit">Отправить форму</button>
     </form>
-</fieldset>
+</fieldset>{% endcomment %}
