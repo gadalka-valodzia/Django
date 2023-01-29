@@ -63,13 +63,12 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
 
 
     form = UserForm()  # шаблон формы для передачи
-    form_promotion = PromotionForm()
     form_contract = ContractForm()
     form_work = WorkForm()
     form_work_name = Mesto_nameForm()
     mesto=list_mecto.objects.all()
     dolzhnocti_list=List_dolzhnost.objects.all()
     promotion_list = list_promotion.objects.all()
-    data = dict(form=form, form_promotion=form_promotion, form_contract=form_contract, form_work=form_work,
+    data = dict(form=form, form_contract=form_contract, form_work=form_work,
             form_work_name=form_work_name, mesto=mesto,dolzhnost=dolzhnocti_list,promotion=promotion_list, error=error)
     return render(request, 'djangoProject/user.html', data)
