@@ -32,3 +32,11 @@ class WorkAdmin(admin.ModelAdmin):
     ordering = ['dolzhnost']
     list_per_page = 5
     search_fields = ['personal_id']
+
+@admin.register(list_mecto)
+class MestoAdmit(admin.ModelAdmin):
+
+    list_display = ['name_mecto']
+    ordering = ['name_mecto']
+    list_per_page = 9
+    search_fields = ['name_mecto']
