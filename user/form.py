@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea
 from .models import User
-from .models import Promotion, Contract,Work,list_mecto
+from .models import Promotion, Contract,Work,list_mecto, List_dolzhnost, list_promotion
 
 
 class UserForm(ModelForm):
@@ -39,17 +39,6 @@ class UserForm(ModelForm):
             # })
         }
 
-class PromotionForm(ModelForm):
-
-    class Meta:
-        model = Promotion
-        fields = ['promotion']
-        widgets = {
-            "promotion": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Ваше поощерение'
-            })
-        }
 class ContractForm(ModelForm):
     class Meta:
         model = Contract
@@ -70,12 +59,8 @@ class WorkForm(ModelForm):
 
     class Meta:
         model = Work
-        fields = {'mesto','data_start_work','data_end_work','dolzhnost'}
+        fields = {'data_start_work','data_end_work'}
         widgets = {
-            "mesto": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'В/ч где работали'
-            }),
             "data_start_work": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Дата начала работы'
@@ -83,10 +68,6 @@ class WorkForm(ModelForm):
             "data_end_work": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Дата окончания работы'
-            }),
-            "dolzhnost": TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Занимаемая должность'
             })
         }
 
@@ -100,4 +81,28 @@ class Mesto_nameForm(ModelForm):
                 'class': 'RadioSelect',
                 'choices': 'CHOICES'
             })
+        }
+
+class Dolzhnosti_nameFrom(ModelForm):
+
+    class Meta:
+        model = List_dolzhnost
+        fields = {'name_dolzhnost'}
+        widgets = {
+            "name_dolzhnost":TextInput(attrs={
+                'class': 'RadioSelect',
+                'choices': 'CHOICES'
+        })
+        }
+
+class Promotion_nameForm(ModelForm):
+
+    class Meta:
+        model = list_promotion
+        fields = {'name_promotion'}
+        widgets = {
+            "name_promotion":TextInput(attrs={
+                'class': 'RadioSelect',
+                'choices': 'CHOICES'
+        })
         }

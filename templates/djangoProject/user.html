@@ -4,7 +4,6 @@
     <form method="POST"> {% csrf_token %} {# форма будет чтото отправлять на сервер #}
         {{ form.name }}<br>
         {{ form.surname }}<br>
-        {{ form.patronymic }}<br>
         {{ form.self_phone_number }}<br>
         {{ form.home_phone_number }}<br>
         {{ form.passport_number }}<br>
@@ -13,9 +12,18 @@
         {{ form_contract.data_okonchanie }}<br>
         {{ form_work.data_start_work }}<br>
         {{ form_work.data_end_work }}<br>
-        {{ form_work.dolzhnost }}<br>
-        <select name="mesto">
+        <select name="name_mecto">
         {% for el in mesto %}
+            <option value="{{el}}" > {{ el }}</option>
+        {% endfor %}
+        </select>
+        <select name="name_dolzhnost">
+        {% for el in dolzhnost %}
+            <option value="{{el}}" > {{ el }}</option>
+        {% endfor %}
+        </select>
+        <select name="name_promotion">
+        {% for el in promotion %}
             <option value="{{el}}" > {{ el }}</option>
         {% endfor %}
         </select>

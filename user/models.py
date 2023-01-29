@@ -13,28 +13,37 @@ class User(models.Model):
     home_phone_number = models.IntegerField(blank=True)  # номер городского телефона сотрудника
     passport_number = models.IntegerField()  # номер паспорта
 
+
+
+class list_promotion(models.Model):
+    name_promotion = models.CharField(max_length=40)
+    def __str__(self):
+        return f'{self.name_promotion}'
 class Promotion(models.Model):
-    promotion = models.CharField(max_length=40)
+    promotion = models.ForeignKey(list_promotion,on_delete=models.SET_NULL,null=True)
     personal = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     def __str__(self):
         return f'{self.promotion}'
 
-class Work(models.Model):
-    mesto = models.CharField(max_length=40,null=True)
-    data_start_work = models.DateField(null=True)
-    data_end_work = models.DateField(null=True)
-    dolzhnost=models.CharField(max_length=40)
-    personal=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
 
-class List_dolzhnost(models.Model):
-    name_dolzhnost = models.CharField(max_length=40)
-    personal = models.ForeignKey(Work, on_delete=models.SET_NULL, null=True)
+
 
 class list_mecto(models.Model):
     name_mecto = models.CharField(max_length=40)
-    personal = models.ForeignKey(Work,on_delete=models.SET_NULL,null=True)
     def __str__(self):
         return f'{self.name_mecto}'
+
+class List_dolzhnost(models.Model):
+    name_dolzhnost = models.CharField(max_length=40)
+    def __str__(self):
+        return f'{self.name_dolzhnost}'
+
+class Work(models.Model):
+    mesto = models.ForeignKey(list_mecto, on_delete=models.SET_NULL, null=True)
+    data_start_work = models.DateField(null=True)
+    data_end_work = models.DateField(null=True)
+    dolzhnost = models.ForeignKey(List_dolzhnost, on_delete=models.SET_NULL, null=True)
+    personal = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
 class Contract(models.Model):
     data_zukluchenie = models.DateField(null=True)
