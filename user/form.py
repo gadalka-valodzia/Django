@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea
 from .models import User
-from .models import Promotion, Contract,Work,list_mecto, List_dolzhnost, list_promotion
+from .models import Promotion, Contract,Work,list_mecto, List_dolzhnost, list_promotion,Rodstvenniki,vid_Rodstvenniki,Obrazovanie,vid_Zavedenie
 
 
 class UserForm(ModelForm):
@@ -105,4 +105,74 @@ class Promotion_nameForm(ModelForm):
                 'class': 'RadioSelect',
                 'choices': 'CHOICES'
         })
+        }
+
+class RodstvennikiForm(ModelForm):
+    class Meta:
+        model = Rodstvenniki
+        fields = ['name_rod','surname_rod','patronomyc_rod','date_born','date_brak','date_razvod']
+        widgets = {
+            "name_rod": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Имя'
+            }),"surname_rod": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Фамилия'
+            }),
+            "patronomyc_rod": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Отчество'
+            }),
+            "date_born": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата рождения'
+            }),
+            "date_brak": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата брака'
+            }),
+            "date_razvod": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата развода'
+            })
+        }
+class vid_RodstvennikiForm(ModelForm):
+    class Meta:
+        model = vid_Rodstvenniki
+        fields = ['name_rodstvennik']
+        widgets = {
+            "name_rodstvennik": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Вид родственной связи'
+            })
+        }
+
+class ObrazovanieForm(ModelForm):
+    class Meta:
+        model = Obrazovanie
+        fields = ['date_postuplen','date_okonch','obrazovanie_perepodgotovka']
+        widgets = {
+            "date_postuplen": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата поступления'
+            }),
+            "date_okonch": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Дата окончания'
+            }),
+            "obrazovanie_perepodgotovka": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Образование/переподготовка'
+            })
+        }
+
+class vid_ZavedenieForm(ModelForm):
+    class Meta:
+        model = vid_Zavedenie
+        fields = ['name_vuz']
+        widgets = {
+            "name_vuz": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Наименование УЗ'
+            })
         }

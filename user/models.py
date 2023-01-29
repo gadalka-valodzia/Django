@@ -57,3 +57,58 @@ class Zvanie(models.Model):
     data_get = models.DateField(null=True)
     name_doc = models.CharField(max_length=40)
     personal = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+
+
+
+class vid_Rodstvenniki(models.Model):
+    class Meta:
+        verbose_name = 'Вид родственников'
+        verbose_name_plural = 'Виды родтсвенников'
+
+    name_rodstvennik = models.CharField(max_length=40, verbose_name='Наименование')
+
+    def __str__(self):
+        return f'{self.name_rodstvennik}'
+
+class Rodstvenniki(models.Model):
+    class Meta:
+        verbose_name = 'Родственники'
+        verbose_name_plural = 'Родственники'
+
+    vid_svyazi = models.OneToOneField(vid_Rodstvenniki, null=True,on_delete=models.SET_NULL, verbose_name='Вид родственной связи',blank=True)
+    name_rod = models.CharField(max_length=40, verbose_name='Имя')
+    surname_rod = models.CharField(max_length=40, verbose_name='Фамилия')
+    patronomyc_rod = models.CharField(max_length=40, verbose_name='Отчество')
+    date_born = models.DateField(null=True, verbose_name='Дата рождения')
+    date_brak = models.DateField(null=True, verbose_name='Дата брака')
+    date_razvod = models.DateField(null=True, verbose_name='Дата развода')
+    personal = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Сотрудник')
+
+    def __str__(self):
+        return f'{self.surname_rod} {self.name_rod} {self.patronomyc}'
+
+
+class vid_Zavedenie(models.Model):
+    class Meta:
+        verbose_name = 'Название УЗ'
+        verbose_name_plural = 'Названия УЗ'
+
+    name_vuz = models.CharField(max_length=40, verbose_name='Название')
+
+    def __str__(self):
+        return f'{self.name_vuz}'
+
+
+class Obrazovanie(models.Model):
+    class Meta:
+        verbose_name = 'Образование'
+        verbose_name_plural = 'Образования'
+
+    vuz = models.OneToOneField(vid_Zavedenie, null=True, on_delete=models.SET_NULL, verbose_name='Наименования УЗ', blank=True)
+    date_postuplen = models.DateField(null=True, verbose_name='Дата поступления')
+    date_okonch = models.DateField(null=True, verbose_name='Дата окончания')
+    obrazovanie_perepodgotovka = models.CharField(max_length=40, verbose_name='Образование/Переподготовка')
+    personal = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Сотрудник')
+
+    def __str__(self):
+        return f'{self.vuz}'

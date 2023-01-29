@@ -2,31 +2,63 @@
 <fieldset>
     <legend>Персональная информация</legend>
     <form method="POST"> {% csrf_token %} {# форма будет чтото отправлять на сервер #}
+        <h1 align="center">Личная информация</h1>
         {{ form.name }}<br>
         {{ form.surname }}<br>
         {{ form.patronymic }}<br>
         {{ form.self_phone_number }}<br>
         {{ form.home_phone_number }}<br>
         {{ form.passport_number }}<br>
+
+        <h1 align="center">Родственики</h1>
+        <p>Родственник:
+        <select name="name_rodstvennik">
+        {% for el in rod %}
+            <option value="{{el}}" > {{ el }}</option>
+        {% endfor %}
+        </select><br>
+        {{form_rodstvennik.name_rod }}<br>
+        {{ form_rodstvennik.surname_rod}}<br>
+        {{ form_rodstvennik.patronomyc_rod}}<br>
+        {{ form_rodstvennik.date_born}}<br>
+        {{ form_rodstvennik.date_brak}}<br>
+        {{ form_rodstvennik.date_razvod}}<br>
+        <h1  align="center">Контракт</h1>
         {{ form_contract.data_zukluchenie }}<br>
         {{ form_contract.data_okonchanie }}<br>
+        <h1 align="center">Работа</h1>
         {{ form_work.data_start_work }}<br>
         {{ form_work.data_end_work }}<br>
+        <p>В/ч службы:
         <select name="name_mecto">
         {% for el in mesto %}
             <option value="{{el}}" > {{ el }}</option>
         {% endfor %}
-        </select>
+        </select><br>
+        <p>Занимаемая должность:
         <select name="name_dolzhnost">
         {% for el in dolzhnost %}
             <option value="{{el}}" > {{ el }}</option>
         {% endfor %}
-        </select>
+        </select><br>
+        <h1 align="center">Образование</h1>
+        <p>ВУЗ где учились:
+        <select name="name_vuz">
+        {% for el in vid_zaved %}
+            <option value="{{el}}" > {{ el }}</option>
+        {% endfor %}
+        </select><br>
+        {{ form_obraz.date_okonch }}<br>
+        {{ form_obraz.date_postuplen}}<br>
+        {{ form_obraz.obrazovanie_perepodgotovka }}<br>
+        <h1 align="center">Поощерения</h1>
         <select name="name_promotion">
         {% for el in promotion %}
             <option value="{{el}}" > {{ el }}</option>
         {% endfor %}
-        </select>
+        </select><br>
+
+
         <span>{{ error }}</span>
         <button class="btn btn-success " type="submit">Отправить форму</button>
     </form>
