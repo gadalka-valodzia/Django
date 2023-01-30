@@ -1,6 +1,6 @@
 from django.forms import ModelForm, TextInput, Textarea
 from .models import User
-from .models import Promotion, Contract,Work,list_mecto, List_dolzhnost, list_promotion,Rodstvenniki,vid_Rodstvenniki,Obrazovanie,vid_Zavedenie
+from .models import Promotion, Contract,Work,list_mecto, List_dolzhnost, list_promotion,Rodstvenniki,vid_Rodstvenniki,Obrazovanie,vid_Zavedenie,vid_Vziskanie
 
 
 class UserForm(ModelForm):
@@ -174,5 +174,19 @@ class vid_ZavedenieForm(ModelForm):
             "name_vuz": TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Наименование УЗ'
+            })
+        }
+
+
+class vid_VziskanieForm(ModelForm):
+
+    class Meta:
+        model = vid_Vziskanie
+        fields = ['name_vziskanie']
+        widgets = {
+            "name_vziskanie": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Вид взыскания'
+
             })
         }

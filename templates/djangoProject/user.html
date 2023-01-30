@@ -58,6 +58,13 @@
             <option value="{{el}}" > {{ el }}</option>
         {% endfor %}
         </select><br>
+        <h1 align="center">Взыскания</h1>
+        <p>Вид взыскания:
+        <select name="name_vziskanie">
+        {% for el in vzisk %}
+            <option value="{{el}}" > {{ el }}</option>
+        {% endfor %}
+        </select><br>
 
 
         <span>{{ error }}</span>

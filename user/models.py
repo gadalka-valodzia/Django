@@ -129,3 +129,28 @@ class Obrazovanie(models.Model):
 
     def __str__(self):
         return f'{self.vuz}'
+
+
+
+class vid_Vziskanie(models.Model):
+
+    class Meta:
+        verbose_name = 'Вид взыскания'
+        verbose_name_plural = 'Виды взысканий'
+
+    name_vziskanie = models.CharField(max_length=40, verbose_name='Наименование',blank=True)
+
+    def __str__(self):
+        return f'{self.name_vziskanie}'
+
+
+class Vziskanie(models.Model):
+    class Meta:
+        verbose_name = 'Взыскание'
+        verbose_name_plural = 'Взыскания'
+
+    vid_vziskania = models.OneToOneField(vid_Vziskanie,null=True, max_length=40, on_delete=models.SET_NULL,verbose_name='Вид взыскания',blank=True)
+    personal = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='Сотрудник')
+
+    def __str__(self):
+        return f'{self.vid_vziskania}'

@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .form import UserForm,  ContractForm,WorkForm,Mesto_nameForm, Dolzhnosti_nameFrom, Promotion_nameForm,vid_RodstvennikiForm,RodstvennikiForm,vid_ZavedenieForm,ObrazovanieForm
-from .models import User, Promotion, Contract, Work, list_mecto, List_dolzhnost, list_promotion,vid_Rodstvenniki,Rodstvenniki,vid_Zavedenie,Obrazovanie
+from .form import UserForm,  ContractForm,WorkForm,Mesto_nameForm, Dolzhnosti_nameFrom, Promotion_nameForm,vid_RodstvennikiForm,RodstvennikiForm,vid_ZavedenieForm,vid_VziskanieForm,ObrazovanieForm
+from .models import User, Promotion, Contract, Work, list_mecto, List_dolzhnost, list_promotion,vid_Rodstvenniki,Rodstvenniki,vid_Zavedenie,Obrazovanie,vid_Vziskanie,Vziskanie
 from django.http import HttpResponse
 
 
@@ -20,7 +20,8 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
         form_rodstvenniki = RodstvennikiForm(request.POST)
         form_obrazovanie = ObrazovanieForm(request.POST)
         form_vid_zavedenie = vid_ZavedenieForm(request.POST)
-        if form.is_valid()  and form_obrazovanie.is_valid() and form_vid_zavedenie.is_valid() and form_contract.is_valid() and form_work.is_valid() and form_wotk_list.is_valid() and form_dolzh_list.is_valid() and form_rodstvenniki.is_valid() and form_promotion_list.is_valid() and form_name_rodstvennik.is_valid():  # провека навалидность
+        form_vziskanie_list=vid_VziskanieForm(request.POST)
+        if form.is_valid()  and form_obrazovanie.is_valid() and form_vziskanie_list.is_valid() and form_vid_zavedenie.is_valid() and form_contract.is_valid() and form_work.is_valid() and form_wotk_list.is_valid() and form_dolzh_list.is_valid() and form_rodstvenniki.is_valid() and form_promotion_list.is_valid() and form_name_rodstvennik.is_valid():  # провека навалидность
             print(form.cleaned_data)
             print(form_contract.cleaned_data)
             print(form_work.cleaned_data)
@@ -31,6 +32,7 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
             print(form_name_rodstvennik.cleaned_data)
             print(form_obrazovanie.cleaned_data)
             print(form_vid_zavedenie.cleaned_data)
+            print(form_vziskanie_list.cleaned_data)
             user_create = User(  # создание обьекта класса и занесение данных в бд
                 name=form.cleaned_data['name'],
                 surname=form.cleaned_data['surname'],
@@ -85,6 +87,11 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
             )
             obrazovanie_create.save()
 
+            vziskanie_create = Vziskanie(
+                vid_vziskania=vid_Vziskanie.objects.get(name_vziskanie = form_vziskanie_list.cleaned_data['name_vziskanie']),
+                personal=user_create
+            )
+            vziskanie_create.save()
              # сохраняем данные в бд
         else:
             error = 'Форма была заполнена неверно'
@@ -101,6 +108,7 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
     promotion_list = list_promotion.objects.all()
     vid_rod = vid_Rodstvenniki.objects.all()
     vid_zav = vid_Zavedenie.objects.all()
-    data = dict(form=form, form_contract=form_contract, form_work=form_work,form_obraz = form_zavedenie,
+    vid_vzisk =vid_Vziskanie.objects.all()
+    data = dict(form=form, form_contract=form_contract, form_work=form_work,form_obraz = form_zavedenie,vzisk=vid_vzisk,
             form_work_name=form_work_name, mesto=mesto,dolzhnost=dolzhnocti_list,vid_zaved = vid_zav,form_rodstvennik= form_rodstvenniki,promotion=promotion_list,rod=vid_rod, error=error)
     return render(request, 'djangoProject/user.html', data)
