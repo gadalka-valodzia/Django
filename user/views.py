@@ -112,3 +112,10 @@ def User_index(request):  # request ДОЛЖЕН БЫТЬ POST!
     data = dict(form=form, form_contract=form_contract, form_work=form_work,form_obraz = form_zavedenie,vzisk=vid_vzisk,
             form_work_name=form_work_name, mesto=mesto,dolzhnost=dolzhnocti_list,vid_zaved = vid_zav,form_rodstvennik= form_rodstvenniki,promotion=promotion_list,rod=vid_rod, error=error)
     return render(request, 'djangoProject/user.html', data)
+
+def FAQ_index(request):
+    return render(request,"djangoProject/faq.html")
+def Main_index(request):
+    return render(request, "djangoProject/base.html")
+def Test_index(request):
+    return render(request,"djangoProject/index.html")
