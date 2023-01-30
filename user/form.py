@@ -33,10 +33,6 @@ class UserForm(ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Ваш номер паспорта'
             })
-            # "promotion": TextInput(attrs={
-            #     'class': 'form-control',
-            #     'placeholder': 'Ваше поощерение'
-            # })
         }
 
 class ContractForm(ModelForm):
@@ -46,11 +42,17 @@ class ContractForm(ModelForm):
         widgets = {
             "data_zukluchenie": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата заключения контракта'
+                'placeholder': 'Дата заключения контракта',
+                'id':'data',
+                'type': 'date',
+                'value': '2023-01-01'
             }),
             "data_okonchanie": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата окончания контракта'
+                'placeholder': 'Дата окончания контракта',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             })
         }
 
@@ -63,11 +65,17 @@ class WorkForm(ModelForm):
         widgets = {
             "data_start_work": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата начала работы'
+                'placeholder': 'Дата начала работы',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             }),
             "data_end_work": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата окончания работы'
+                'placeholder': 'Дата окончания работы',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             })
         }
 
@@ -125,15 +133,24 @@ class RodstvennikiForm(ModelForm):
             }),
             "date_born": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата рождения'
+                'placeholder': 'Дата рождения',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             }),
             "date_brak": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата брака'
+                'placeholder': 'Дата брака',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             }),
             "date_razvod": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата развода'
+                'placeholder': 'Дата развода',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             })
         }
 class vid_RodstvennikiForm(ModelForm):
@@ -154,11 +171,17 @@ class ObrazovanieForm(ModelForm):
         widgets = {
             "date_postuplen": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата поступления'
+                'placeholder': 'Дата поступления',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             }),
             "date_okonch": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Дата окончания'
+                'placeholder': 'Дата окончания',
+                'id': 'data',
+                'type': 'date',
+                'value': '2023-01-01'
             }),
             "obrazovanie_perepodgotovka": TextInput(attrs={
                 'class': 'form-control',
