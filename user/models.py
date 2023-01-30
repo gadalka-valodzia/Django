@@ -9,25 +9,26 @@ class User(models.Model):
     class Meta:
         verbose_name = 'Линые данные'
         verbose_name_plural = 'Личные данные'
-    name = models.CharField(max_length=40)  # имя сотрудника
-    surname = models.CharField(max_length=40)  # фамилия сотрудника
-    patronymic = models.CharField(max_length=40)  # отчество сотрудника
-    self_phone_number = models.IntegerField(blank=True)  # номер мобильного телефона сотрудника
-    home_phone_number = models.IntegerField(blank=True)  # номер городского телефона сотрудника
-    passport_number = models.IntegerField()  # номер паспорта
-
+    name = models.CharField(max_length=40,verbose_name='Имя')  # имя сотрудника
+    surname = models.CharField(max_length=40,verbose_name='Фамилия')  # фамилия сотрудника
+    patronymic = models.CharField(max_length=40,verbose_name='Отчество')  # отчество сотрудника
+    self_phone_number = models.IntegerField(blank=True,verbose_name='Мобильный номер')  # номер мобильного телефона сотрудника
+    home_phone_number = models.IntegerField(blank=True,verbose_name='Домашний номер')  # номер городского телефона сотрудника
+    passport_number = models.IntegerField(verbose_name='Номер паспорта')  # номер паспорта
+    def __str__(self):
+        return f'{self.surname} {self.name} {self.patronymic}'
 class list_promotion(models.Model):
     class Meta:
         verbose_name = 'Список поощерений'
         verbose_name_plural = 'Список поощерений'
-    name_promotion = models.CharField(max_length=40)
+    name_promotion = models.CharField(max_length=40,verbose_name='Поощрение')
     def __str__(self):
         return f'{self.name_promotion}'
 class Promotion(models.Model):
     class Meta:
         verbose_name = 'Поощерения'
         verbose_name_plural = 'Поощерения'
-    promotion = models.ForeignKey(list_promotion,on_delete=models.SET_NULL,null=True)
+    promotion = models.ForeignKey(list_promotion,on_delete=models.SET_NULL,null=True,verbose_name='Поощрение')
     personal = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     def __str__(self):
         return f'{self.promotion}'
@@ -36,7 +37,7 @@ class list_mecto(models.Model):
     class Meta:
         verbose_name = 'Список в/ч'
         verbose_name_plural = 'Список в/ч'
-    name_mecto = models.CharField(max_length=40)
+    name_mecto = models.CharField(max_length=40,verbose_name='Место работы')
     def __str__(self):
         return f'{self.name_mecto}'
 
@@ -44,7 +45,7 @@ class List_dolzhnost(models.Model):
     class Meta:
         verbose_name = 'Список должностей'
         verbose_name_plural = 'Список должностей'
-    name_dolzhnost = models.CharField(max_length=40)
+    name_dolzhnost = models.CharField(max_length=40,verbose_name='Наименование должности')
     def __str__(self):
         return f'{self.name_dolzhnost}'
 
@@ -52,18 +53,19 @@ class Work(models.Model):
     class Meta:
         verbose_name = 'Работа'
         verbose_name_plural = 'Работа'
-    mesto = models.ForeignKey(list_mecto, on_delete=models.SET_NULL, null=True)
-    data_start_work = models.DateField(null=True)
-    data_end_work = models.DateField(null=True)
-    dolzhnost = models.ForeignKey(List_dolzhnost, on_delete=models.SET_NULL, null=True)
+    mesto = models.ForeignKey(list_mecto, on_delete=models.SET_NULL, null=True,verbose_name='Место работы')
+    data_start_work = models.DateField(null=True,verbose_name='Дата начала')
+    data_end_work = models.DateField(null=True,verbose_name='Дата окончания')
+    dolzhnost = models.ForeignKey(List_dolzhnost, on_delete=models.SET_NULL, null=True,verbose_name='Должность')
     personal = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-
+    def __str__(self):
+        return f'{self.mesto} {self.data_start_work} {self.data_end_work} {self.dolzhnost}'
 class Contract(models.Model):
     class Meta:
         verbose_name = 'Контракт'
         verbose_name_plural = 'Контракт'
-    data_zukluchenie = models.DateField(null=True)
-    data_okonchanie = models.DateField(null=True)
+    data_zukluchenie = models.DateField(null=True,verbose_name='Дата заключения')
+    data_okonchanie = models.DateField(null=True,verbose_name='Дата окончания')
     personal = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
 
     def __str__(self):
@@ -73,9 +75,11 @@ class Zvanie(models.Model):
     class Meta:
         verbose_name = 'Звания'
         verbose_name_plural = 'Звания'
-    data_get = models.DateField(null=True)
-    name_doc = models.CharField(max_length=40)
+    data_get = models.DateField(null=True,verbose_name='Дата получения')
+    name_doc = models.CharField(max_length=40,verbose_name='Название документа')
     personal = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    def __str__(self):
+        return f'{self.data_get} - {self.name_doc}'
 
 class vid_Rodstvenniki(models.Model):
     class Meta:
