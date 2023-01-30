@@ -23,11 +23,13 @@ class UserForm(ModelForm):
             }),
             "self_phone_number": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ваш мобильный номер телефона'
+                'placeholder': 'Ваш мобильный номер телефона',
+                'value': '+375'
             }),
             "home_phone_number": TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Ваш городской номер телефона'
+                'placeholder': 'Ваш городской номер телефона',
+                'value': '+375'
             }),
             "passport_number": TextInput(attrs={
                 'class': 'form-control',
